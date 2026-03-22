@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         SONAR_TOKEN = credentials('sonar-token')
+        SCANNER_HOME = tool 'sonar-scanner'
     }
 
     stages {
@@ -15,8 +16,8 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh '''
-                        sonar-scanner \
+                    sh """
+                        ${SCANNER_HOME}/bin/sonar-scanner \
                           -Dsonar.projectKey=devops-assignment-5 \
                           -Dsonar.projectName="DevOps Assignment 5 - FastAPI" \
                           -Dsonar.projectVersion=1.0 \
@@ -25,7 +26,7 @@ pipeline {
                           -Dsonar.language=py \
                           -Dsonar.python.version=3 \
                           -Dsonar.token=${SONAR_TOKEN}
-                    '''
+                    """
                 }
             }
         }
