@@ -25,7 +25,7 @@ pipeline {
                           -Dsonar.exclusions=**/__pycache__/**,**/*.pyc,**/venv/**,.git/** \
                           -Dsonar.language=py \
                           -Dsonar.python.version=3 \
-                          -Dsonar.token=${SONAR_TOKEN}
+                          -Dsonar.token=\${SONAR_TOKEN}
                     """
                 }
             }
